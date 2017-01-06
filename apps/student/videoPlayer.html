@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>HoverCam Knotester Player</title>
+    <link href="http://vjs.zencdn.net/5.10.7/video-js.css" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style>
+        .video-js {
+            /* The base font size controls the size of everything, not just text.
+         All dimensions use em-based sizes so that the scale along with the font size.
+         Try increasing it to 15px and see what happens. */
+            font-size: 10px;
+            /* The main font color changes the ICON COLORS as well as the text */
+            color: #fff;
+        }
+        /* The "Big Play Button" is the play button that shows before the video plays.
+       To center it set the align values to center and middle. The typical location
+       of the button is the center, but there is trend towards moving it to a corner
+       where it gets out of the way of valuable content in the poster image.*/
+
+        .vjs-default-skin .vjs-big-play-button {
+            /* The font size is what makes the big play button...big.
+         All width/height values use ems, which are a multiple of the font size.
+         If the .video-js font-size is 10px, then 3em equals 30px.*/
+            font-size: 3em;
+            /* We're using SCSS vars here because the values are used in multiple places.
+         Now that font size is set, the following em values will be a multiple of the
+         new font size. If the font-size is 3em (30px), then setting any of
+         the following values to 3em would equal 30px. 3 * font-size. */
+            /* 1.5em = 45px default */
+            line-height: 1.5em;
+            height: 1.5em;
+            width: 3em;
+            /* 0.06666em = 2px default */
+            border: 0.06666em solid #fff;
+            /* 0.3em = 9px default */
+            border-radius: 0.3em;
+            /* Align top left. 0.5em = 15px default */
+            left: 0.5em;
+            top: 0.5em;
+        }
+        /* The default color of control backgrounds is mostly black but with a little
+       bit of blue so it can still be seen on all-black video frames, which are common. */
+
+        .video-js .vjs-control-bar,
+        .video-js .vjs-big-play-button,
+        .video-js .vjs-menu-button .vjs-menu-content {
+            /* IE8 - has no alpha support */
+            background-color: #2B333F;
+            /* Opacity: 1.0 = 100%, 0.0 = 0% */
+            background-color: rgba(43, 51, 63, 0.7);
+        }
+        /* Slider - used for Volume bar and Progress bar */
+
+        .video-js .vjs-slider {
+            background-color: #73859f;
+            background-color: rgba(115, 133, 159, 0.5);
+        }
+        /* The slider bar color is used for the progress bar and the volume bar
+       (the first two can be removed after a fix that's coming) */
+
+        .video-js .vjs-volume-level,
+        .video-js .vjs-play-progress,
+        .video-js .vjs-slider-bar {
+            background: #fff;
+        }
+        /* The main progress bar also has a bar that shows how much has been loaded. */
+
+        .video-js .vjs-load-progress {
+            /* For IE8 we'll lighten the color */
+            background: ligthen(#73859f, 25%);
+            /* Otherwise we'll rely on stacked opacities */
+            background: rgba(115, 133, 159, 0.5);
+        }
+        /* The load progress bar also has internal divs that represent
+       smaller disconnected loaded time ranges */
+
+        .video-js .vjs-load-progress div {
+            /* For IE8 we'll lighten the color */
+            background: ligthen(#73859f, 50%);
+            /* Otherwise we'll rely on stacked opacities */
+            background: rgba(115, 133, 159, 0.75);
+        }
+
+        .vjs-default-skin .vjs-big-play-button {
+            margin-left: -@big-play-width/2;
+            margin-top: -@big-play-height/2;
+            left: 50%;
+            top: 50%;
+        }
+    </style>
+</head>
+
+<body style="background-color:rgba(0,0,0,0.2);" ng-app="studentApp">
+    <div class="row">
+      <div class="col-md-3">
+          <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle"
+                    type="button" data-toggle="dropdown"> Add New Bookmark
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li class="list-group-item list-group-item-success" ng-click="SaveBookmark('test')">{{str_Test}}</li>
+              <li class="list-group-item list-group-item-info"    ng-click="SaveBookmark('review')">{{str_Review}}</li>
+              <li class="list-group-item list-group-item-warning" ng-click="SaveBookmark('question')">{{str_Question}}</li>
+              <li class="list-group-item list-group-item-danger"  ng-click="SaveBookmark('important')">{{str_Important}}</li>
+              <li class="list-group-item list-group-item-success" ng-click="SaveBookmark('audio')">{{str_Audio}}</li>
+            </ul>
+          </div>
+
+          <ul class="list-group">
+            <div ng-repeat="bookmark in bookmarks">
+              <li class="{{bookmark.htmlClass}}" ng-click="SetVideoTime(bookmark.position)">
+                <img src="{{bookmark.icon}}" height="16" width="16">
+                {{bookmark.type}}
+                <span class="badge">Min: {{bookmark.min}}
+                                    Sec: {{bookmark.sec}}</span>
+              </li>
+            </div>
+          </ul>
+      </div>
+      <div class="col-md-9">
+        <video
+          id="videoPlayer"
+          class="video-js vjs-default-skin"
+          width="80%" height="100%" controls preload="auto" data-setup='{"aspectRatio":"1280:720", "playbackRates": [1, 1.5, 2, 4] }'>
+        </video>
+        <script src="http://vjs.zencdn.net/5.10.7/video.js"></script>
+        <script>
+            var myPlayer;
+            videojs("videoPlayer").ready(function() {
+                myPlayer = this;
+                var strUrl = localStorage.getItem("videoUrl");
+                myPlayer.src({
+                    "type": "video/mp4",
+                    // "src": "http://solutions.brightcove.com/bcls/assets/videos/Bird_Titmouse.mp4"
+                    "src": strUrl
+                });
+                //myPlayer.play();
+            });
+        </script>
+      </div>
+    </div>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</body>
+
+
+</html>

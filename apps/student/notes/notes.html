@@ -1,0 +1,225 @@
+<link href="css/student/notes.css" rel="stylesheet">
+<div class="container">
+  <div id="settings-modal" class="notes-modal-class modal fade" role="dialog">
+      <div id="settings-dialog" class="modal-dialog modal-lg">
+        <div class="modal-content settings-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-target="#notes-modal" data-dismiss="modal">&times;</button>
+              <h3 class="modal-title" id="settingf-modal-title">Settings</h3>
+          </div>
+          <div class="modal-body" id="modal-body">
+              <!-- <pre>{{ vm.note | json }}</pre> -->
+              <div class="container-fluid">
+                <div class="col-md-6">
+                  <label for="slider">Select Color</label>
+                  <div class="form-group">
+                    <color-picker
+                        ng-model="vm.settings.color"
+                        id="color-input"
+                        class="angular-color-picker"
+                    ></color-picker>
+                    <!-- <input
+                      minicolors="vm.customSettings"
+                      id="color-input"
+                      class="form-control"
+                      type="text"
+                      name= "color"
+                      ng-model="vm.settings.color"> -->
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <canvas id="setting-canvas"></canvas>
+                  <button class="btn btn-danger btn-block btn-canvas-reset" ng-click="vm.reset()">Clear Canvas</button>
+                  <div class="form-group">
+                    <label for="slider">Select Thickness</label>
+                    <slider ng-model="vm.settings.thickness" min="1" max="30"></slider>
+                  </div>
+                  <div class="form-group">
+                    <label for="slider">Select Tranparency</label>
+                    <slider ng-model="vm.settings.transparency" min="1" max="10"></slider>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <button type="button" ng-click="vm.saveAnnotationsPresets()" class="btn btn-success btn-block" data-target="#notes-modal">Save</button>
+                </div>
+                <div class="col-md-6">
+                  <button type="button" class="btn btn-danger btn-block" data-target="#notes-modal" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div id="notes-modal" class="notes-modal-class modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-target="#notes-modal" data-dismiss="modal">&times;</button>
+              <h3 class="modal-title" id="modal-title">{{vm.note.className}}</h3>
+          </div>
+          <div class="modal-body" id="modal-body">
+              <!-- <pre>{{ vm.note | json }}</pre> -->
+              <div class="container-fluid">
+                  <div class="row">
+                    <!-- Video -->
+                    <div id="videodiv" class="col-lg-9 col-lg-push-3">
+                        <div class="embed-responsive embed-responsive-16by9">
+                          <canvas id="annotation"></canvas>
+                          <video id="Video" class="video-js vjs-default-skin vjs-nofull vjs-fullscreen-control" height="auto" width="auto" controls autoplay> </video>
+                        </div>
+                        <!-- Annotation controls -->
+                        <div class="row">
+                            <!-- <div class="col-lg-12">
+                                <h2>{{vm.note.title}}</h2>
+                            </div> -->
+                            <span class="container col-lg-12">
+                              <div class="dropdown col-lg-5 pull-left">
+                                <button type="button" class="btn btn-default dropdown-toggle pull-left" data-toggle="dropdown">Color : {{vm.AnnotationColor}} <span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu">
+                                  <li ng-click="vm.SetAnnotationColor('Red')"> Red</li>
+                                  <li ng-click="vm.SetAnnotationColor('Cyan')"> Cyan</li>
+                                  <li ng-click="vm.SetAnnotationColor('Magenta')"> Magenta</li>
+                                  <li ng-click="vm.SetAnnotationColor('Green')"> Green</li>
+                                  <li ng-click="vm.SetAnnotationColor('Orange')"> Orange</li>
+                                </ul>
+                              </div>
+
+                              <div class="dropdown col-lg-5 pull-right">
+                                <button type="button" class="btn btn-default dropdown-toggle pull-right" data-toggle="dropdown">Color : {{vm.AnnotationColor}} <span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu">
+                                  <li> <a href="#" data-toggle="modal" href="#notes">Settings</a></li>
+                                  <li ng-click="vm.SetAnnotationColor('Cyan')"> Cyan</li>
+                                  <li ng-click="vm.SetAnnotationColor('Magenta')"> Magenta</li>
+                                  <li ng-click="vm.SetAnnotationColor('Green')"> Green</li>
+                                  <li ng-click="vm.SetAnnotationColor('Orange')"> Orange</li>
+                                </ul>
+                              </div>
+
+                              <button type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                              <button type="button" class="btn btn-primary btn-circle"><i class="glyphicon glyphicon-list"></i></button>
+                              <button type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-link"></i></button>
+                              <button type="button" class="btn btn-info btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                              <button type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button>
+                              <button type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-heart"></i></button>
+
+                              <div class="row pull-down">
+                                <div class="col-lg-6">
+                                    <ul class="circle-menu">
+                                        <img src="icons/circle_selected@2x.png" class="pull-left" ng-click="vm.toggleMarkers()"/>
+                                        <li class="item-1" ng-if="vm.showMarkers" ng-click="vm.SaveBookmark('review')">
+                                            <img src="icons/bm_review@2x.png" alt="">
+                                        </li>
+                                        <li class="item-2" ng-if="vm.showMarkers" ng-click="vm.SaveBookmark('question')">
+                                            <img src="icons/bm_question@2x.png" alt="">
+                                        </li>
+                                        <li class="item-3" ng-if="vm.showMarkers" ng-click="vm.SaveBookmark('important')">
+                                            <img src="icons/bm_important@2x.png" alt="">
+                                        </li>
+                                        <li class="item-4" ng-if="vm.showMarkers" ng-click="vm.SaveBookmark('test')">
+                                            <img src="icons/bm_test@2x.png" alt="">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-4">
+                                    <ul class="anotation-menu pull-right">
+                                        <img src="icons/circle_selected@2x.png" class="pull-left" ng-click="vm.toggleAnnotations()"/>
+                                        <li class="item-1" ng-if="vm.showAnnotations"><img src="icons/bm_review@2x.png" alt=""></li>
+                                        <li class="item-2" ng-if="vm.showAnnotations"><img src="icons/bm_review@2x.png" alt=""></li>
+                                        <li class="item-3" ng-if="vm.showAnnotations"><img src="icons/bm_review@2x.png" alt=""></li>
+                                        <li class="item-4" ng-if="vm.showAnnotations" data-toggle="modal" data-target="#settings-modal"><img src="icons/bm_review@2x.png" alt=""></li>
+                                    </ul>
+                                </div>
+                              </div>
+                            </span>
+                            <!-- <span class="col-lg-4 pull-left">
+                              <button type="button" class="btn btn-primary" ng-click="vm.SaveAnnotations()">Save Annotations </button>
+                            </span> -->
+                            <!-- <span class="col-lg-8 pull-right">
+                                <div class="dropdown col-lg-5 col-lg-offset-2">
+                                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Color : {{vm.AnnotationColor}} <span class="caret"></span></button>
+                                  <ul class="dropdown-menu" role="menu">
+                                    <li ng-click="vm.SetAnnotationColor('Red')"> Red</li>
+                                    <li ng-click="vm.SetAnnotationColor('Cyan')"> Cyan</li>
+                                    <li ng-click="vm.SetAnnotationColor('Magenta')"> Magenta</li>
+                                    <li ng-click="vm.SetAnnotationColor('Green')"> Green</li>
+                                    <li ng-click="vm.SetAnnotationColor('Orange')"> Orange</li>
+                                  </ul>
+                                </div>
+                                <div class="dropdown col-lg-5">
+                                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Thickness : {{vm.AnnotationThickness}}  <span class="caret"></span></button>
+                                  <ul class="dropdown-menu" role="menu">
+                                    <li ng-click="vm.SetAnnotationThickness(1)"> 1</li>
+                                    <li ng-click="vm.SetAnnotationThickness(2)"> 2</li>
+                                    <li ng-click="vm.SetAnnotationThickness(3)"> 3</li>
+                                    <li ng-click="vm.SetAnnotationThickness(4)"> 4</li>
+                                    <li ng-click="vm.SetAnnotationThickness(8)"> 8</li>
+                                    <li ng-click="vm.SetAnnotationThickness(15)"> 15</li>
+                                    <li ng-click="vm.SetAnnotationThickness(30)"> 30</li>
+                                  </ul>
+                                </div>
+                            </span> -->
+                        </div>
+                    </div>
+
+                    <!-- bookmark toolbar -->
+                    <div class="col-lg-3 col-lg-pull-9">
+                        <!-- <div class="row">
+                            <div class="dropdown">
+                                <button class="btn btn-success dropdown-toggle new-bookmark"
+                                        type="button" data-toggle="dropdown">New Bookmark
+                                  <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                  <li class="list-group-item list-group-item-success" ng-click="vm.SaveBookmark('test')">Test</li>
+                                  <li class="list-group-item list-group-item-info"    ng-click="vm.SaveBookmark('review')">Review</li>
+                                  <li class="list-group-item list-group-item-warning" ng-click="vm.SaveBookmark('question')">Question</li>
+                                  <li class="list-group-item list-group-item-danger"  ng-click="vm.SaveBookmark('important')">Important</li>
+                                  <li class="list-group-item list-group-item-success" ng-click="vm.SaveBookmark('audio')">Audio</li>
+                                </ul>
+                            </div>
+                        </div> -->
+                      <div class="row">
+                          <ul class="list-group">
+                            <div ng-repeat="bookmark in vm.bookmarks">
+                              <li class="{{bookmark.htmlClass}}" ng-click="vm.SetVideoTime(bookmark.position)">
+                                <img src="{{bookmark.icon}}" height="16" width="16">
+                                {{bookmark.type}}
+                                <span class="badge">Min: {{bookmark.min}}
+                                                    Sec: {{bookmark.sec}}</span>
+                              </li>
+                            </div>
+                          </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div class="modal-footer">
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="input-group" style="max-width:500px;margin-bottom:10px;">
+    <input type="text" ng-model="searchText" class="form-control note-search-text" placeholder="Search">
+    <span class="input-group-btn">
+      <button class="btn btn-default" ng-show="searchText" type="button" ng-click='searchText ="" '>Clear</button>
+    </span>
+    <button class="note-class-filter form-control">Filter by Class</button>
+</div>
+<!-- /input-group -->
+<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#settings-modal">Open Modal</button> -->
+<div>
+    <ul infinite-scroll='vm.loadMoreNotes()' infinite-scroll-distance='1' class='block-grid'>
+        <div class="note" ng-repeat='note in vm.noteList | filter:searchText' ng-click="vm.noteClickHandle(note)"
+        id="{{vm.getNoteId(note)}}">
+            <img class="note-thumb" ng-src="{{note.coverFullUrl}}"/>
+            <span class="note-title">{{note.title}}</span>
+            <br>{{note.className}}
+            <br>{{note.createdOn | date:'fullDate'}}
+            <br><span class="time-icon">&#9719;</span> {{note.videoLengthStr}}
+        </div>
+    </ul>
+</div>
+<script src="../js/student/notes.js"></script>

@@ -1,0 +1,91 @@
+
+.vjs-default-skin .vjs-fullscreen-control {
+    display: none;
+}
+
+.vjs-default-skin .vjs-progress-control {
+    position:absolute;
+    left:0;
+    right:0;
+    font-size:.3em;
+
+    height: 16px;
+    top:   -16px;
+}
+
+img.vjs-marker {
+    left:-10px;
+}
+
+/* Get mute button to appear before volume control */
+.vjs-default-skin .vjs-volume-control {
+    display: table-footer-group;
+    float: left;
+    left:50px
+}
+.vjs-default-skin .vjs-mute-control, .vjs-default-skin .vjs-volume-menu-button{
+    display: table;
+    float: left;
+    right:50px;
+}
+
+
+
+.vjs-marker {
+  position: absolute;
+  left: 0;
+  bottom: 0em;
+  opacity: 1;
+  height: 100%;
+  transition: opacity .2s ease;
+  -webkit-transition: opacity .2s ease;
+  -moz-transition: opacity .2s ease;
+}
+.vjs-marker:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.3, 1.3);
+  -moz-transform: scale(1.3, 1.3);
+  -o-transform: scale(1.3, 1.3);
+  -ms-transform: scale(1.3, 1.3);
+  transform: scale(1.3, 1.3);
+}
+.vjs-tip {
+  visibility: hidden;
+  display: block;
+  opacity: 0.8;
+  padding: 5px;
+  font-size: 10px;
+  position: absolute;
+  bottom: 14px;
+  z-index: 100000;
+}
+.vjs-tip .vjs-tip-arrow {
+  background: url(data:image/gif;base64,R0lGODlhCQAJAIABAAAAAAAAACH5BAEAAAEALAAAAAAJAAkAAAIRjAOnwIrcDJxvwkplPtchVQAAOw==) no-repeat top left;
+  bottom: 0;
+  left: 50%;
+  margin-left: -4px;
+  background-position: bottom left;
+  position: absolute;
+  width: 9px;
+  height: 5px;
+}
+.vjs-tip .vjs-tip-inner {
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  padding: 5px 8px 4px 8px;
+  background-color: black;
+  color: white;
+  max-width: 200px;
+  text-align: center;
+}
+.vjs-break-overlay {
+  visibility: hidden;
+  position: absolute;
+  z-index: 100000;
+  top: 0;
+}
+.vjs-break-overlay .vjs-break-overlay-text {
+  padding: 9px;
+  text-align: center;
+}

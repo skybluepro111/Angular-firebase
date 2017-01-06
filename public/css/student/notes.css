@@ -1,0 +1,138 @@
+.note {
+    margin: 25px;
+    width: 320px;
+    height: 270px;
+    float: left;
+    background-color: #fff;
+}
+
+.block-grid {
+    display: block;
+    overflow: hidden;
+    padding: 0
+}
+
+#annotation {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 85%;
+    z-index: 1;
+    border: 0px solid #000000;
+}
+
+#setting-canvas {
+  width: 350px;
+  height: 250px;
+  z-index: 1;
+  background-color: #FFF;
+  border: 2px solid #FFF;
+}
+
+.video-js {
+    padding-top: 56.25%;
+}
+
+.new-bookmark {
+    margin-bottom: 20px;
+}
+
+.vjs-nofull .vjs-fullscreen-control {
+    display:none;
+}
+
+.note-title{
+    font-size: 1.3em;
+    color: blue;
+    padding-top: 5px;
+}
+
+.note-thumb{
+    width: 318px;
+    height: 180px;
+    padding-bottom: 5px;
+}
+
+.input-group{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 25px;
+    width: 100%;
+}
+
+.note-search-text{
+    font-size: 1.4em;
+}
+
+.time-icon{
+    font-size: 1.2em;
+}
+
+.note-class-filter{
+
+}
+
+#settings-dialog {
+  min-width: 600px;
+  background-color: grey;
+}
+
+.settings-content {
+  background-color: #f5f5f5;
+}
+
+.btn-canvas-reset {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/*.menu{
+    display: none;
+}
+
+.anotation-menu {
+    display: none;
+}*/
+
+ul.circle-menu {
+    width: 120px;
+}
+
+.circle-menu li {
+    list-style: none;
+    width: 20px;
+}
+.anotation-menu li {
+    list-style: none;
+    width: 20px;
+}
+.item-1 {
+    position: relative;
+    top: -54px;
+    left: -46px;
+}
+
+.item-2 {
+    position: relative;
+    top: -123px;
+    left: -21px;
+}
+
+.item-3 {
+    position: relative;
+    top: -155px;
+    left: 52px;
+}
+
+.item-4 {
+    position: relative;
+    top: -145px;
+    left: 76px;
+}
+
+.pull-down {
+    margin-top: 22px;
+}

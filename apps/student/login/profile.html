@@ -1,0 +1,168 @@
+<link href="css/student/login.css" rel="stylesheet">
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-login">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-4">
+                      <a href="#/profile"
+                         ng-class="{ 'active': vm.pageNumber == 1 }"
+                         ng-click="vm.changePage(1)"
+                         id="profile-form-link">Profile
+                       </a>
+                    </div>
+                    <div class="col-xs-4">
+                      <a href="#profile"
+                         ng-class="{ 'active': vm.pageNumber == 2 }"
+                         ng-click="vm.changePage(2)"
+                         id="password-form-link">
+                         Change Password
+                      </a>
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="#/profile"
+                           id="email-form-link"
+                           ng-click="vm.changePage(3)"
+                           ng-class="{ 'active': vm.pageNumber == 3 }">
+                           Change Email
+                       </a>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="panel-body" ng-if="vm.pageNumber == 1">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form id="profile-form" ng-submit="vm.saveProfile()" role="form">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name" ng-model='vm.firstName' ng-change='vm.checkEdit()'>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name" ng-model='vm.lastName' ng-change='vm.checkEdit()'>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" readonly="true" ng-model='currentUser.email'>
+                            </div>
+                            <div class="form-group" style="display:none;">
+                                <input type="password" id="inputPassword" class="form-control" placeholder="Password">
+                            </div>
+                            <div class="form-group" style="display:none;">
+                                <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="inputPhone" class="form-control" placeholder="Phone number" ng-model='vm.phone' ng-change='vm.checkEdit()'>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <button type="submit" name="profile-submit" class="form-control btn btn-register " tabindex="4" ng-disabled="vm.profileUpdating">
+                                            Update
+                                            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" ng-show="vm.profileUpdating"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-body" ng-if="vm.pageNumber == 3">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form id="email-form" ng-submit="vm.changeEmail()" role="form">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div ng-repeat="error in vm.changeEmailErrors" class="alert alert-danger" >
+                                     {{error}}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email address" readonly="true" ng-model="currentUser.email">
+                            </div>
+                            <div class="form-group">
+                                <input type="email"
+                                id="newEmail"
+                                class="form-control"
+                                placeholder="Email address"
+                                ng-class="{ 'error': vm.changeEmailErrorsClass.email }"
+                                ng-model="vm.email">
+                            </div>
+                            <div class="form-group">
+                                <input type="password"
+                                       class="form-control"
+                                       placeholder="Password"
+                                       ng-class="{ 'error': vm.changeEmailErrorsClass.password }"
+                                       ng-model="vm.password">
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                      <button type="submit" class="form-control btn btn-register " tabindex="4" ng-disabled="vm.emailUpdating">
+                                          Change Email
+                                          <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" ng-show="vm.emailUpdating"></span>
+                                      </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-body" ng-if="vm.pageNumber == 2">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form id="password-form" ng-submit="vm.changePassword()" role="form">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div ng-repeat="error in vm.changePasswordErrors" class="alert alert-danger" >
+                                         {{error}}
+                                    </div>
+                                </div>
+                                <input type="password"
+                                       id="oldPassword"
+                                       class="form-control"
+                                       placeholder="Current Password"
+                                       ng-class="{ 'error': vm.changePasswordErrorsClass.currentPassword }"
+                                       ng-model="vm.currentPassword"
+                                       required="required">
+                            </div>
+                            <div class="form-group">
+                                <input type="password"
+                                       class="form-control"
+                                       placeholder="New Password"
+                                       ng-class="{ 'error': vm.changePasswordErrorsClass.newPassword }"
+                                       ng-model="vm.newPassword"
+                                       required="required" >
+                            </div>
+                            <div class="form-group">
+                                <input type="password"
+                                       class="form-control"
+                                       placeholder="Confirm Password"
+                                       ng-class="{ 'error': vm.changePasswordErrorsClass.confirmPassword }"
+                                       ng-model="vm.confirmPassword"
+                                       required="required" >
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <button type="submit" name="password-submit" class="form-control btn btn-register " tabindex="4" ng-disabled="vm.passwordUpdating">
+                                            Change Password
+                                            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" ng-show="vm.passwordUpdating"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

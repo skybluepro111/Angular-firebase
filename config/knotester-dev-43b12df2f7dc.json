@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "knotester-dev",
+  "private_key_id": "43b12df2f7dcd11844b59b0e412970e384f2f72b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCaH4/h16kxH1NQ\nOrNJ5WAPhAsWzopRJd/ob3EQXcXmpj88LNtMd7sa3KsZNFs4akg4Q7rvlRv5sNDF\nrFc3OWItf3YjwHknFp8n06oetW/SM9Flo3XCvMvrmMQd53OVwtgdwtebjEKB4iXc\nMGCgFWI4CK34ssMVqWi9OtviN1n/KY58tpQ6WbWfUy4F0jewk0dUZvyaEugqLnpl\npG3CTjULvJr6FeqQK/50Rd16rWgzmup5rUIpgQr7sQNlYbUSa8R5Xyyf01vVkL51\n0LUqMAnMlrYuuBJ+r7q9QXPwetA40OETlPHUY8cWLcxuEEunRhaMBDHxNNUa6WbM\nfvCb8U/fAgMBAAECggEAdYfmGCp2uqARz5fEC3EgzRQ7xJuivPkuA7mgNgPcm+Rh\nSolGfsy7YWOwEptriNz7z/ROhM9nswSUYHnpVJKs/Nc7h04K1bUZj6yJCbwA1wJv\nB5wcfHGu7C3mOIu9CBK67g8cjmDqgtOrXXuC4/EKooJz8LiZrlYvKkbNUXg2aC7g\nIB+Mp2DxyQ7fnbgvu8ph55LLJBJgCy4hHOt3RlXqaln0W+JXJO3pYPvaViLlDqRA\nWbixMf7dozI1qQts/74atiaLix5jdiFsVeg8tJdLytHWdKHkw+K0RK89ZDaRA2V5\naIXiueNr++zkR7p0UxN7rblpveCOWB+LmwrQ5WeOmQKBgQDSs4IuvFlldBo96Iln\ndJNxoYADEhyqBRaDFZOXgTZzhhAvIliGSEs70zea2Lh+rL73Zet2xyg6DNFrWU2I\n3s375vozWos0Gv5Rzua7ncE9JKDONeQ8BasFEFSUoNfQuy/M1Q6+9QfPNUZxjVWu\npbrzA/3VqA+P3542JU+2orgxSwKBgQC7QiPaNef3PAaGf6UZwCPjMPxHsu5Bo//F\njH8RrLPIwOljl2jguM9uBMGNJcoiabYdp4LbQ9u9hjBIMtbXq/ChUWPyGI8U3Em0\nfxmerHkfx/Y6OXBpKvtlfPZJbGoRJc8dXK7iYtWBz8KE4hPW4C1ugZc35R/7p94k\nP7NSdQ8TPQKBgQC4iMs9j2xkNJk/G0gsOadg3+czyUsdhTNAP0dya5J6/zFxdo09\nnld13/lVPvXmy/i8yKC++JI8tTk84YvMkgap1pPPIj/EtNeEYscmDnZNzKShtgVc\npEIyPyk0uuIJR8gHh5pQmF3slmZJ0VT3juL7L8XCuFxYz6rLFUaJWF4lnQKBgGhh\nNsDkuXebsvt33VzcOGTkokuJFrvqIaFJbm84uEJYHgBQnrpc6esmpYj7HpBOIqCn\nBg8Y5TzgtrsX85/mjMwvJSoGvILhRAhjrLFA7Idlm//akqlctyNcI6DL2NfUHn38\nctNoSiEA4SnXJz3oWgq2G8ehZVGOwgmspFV7QLr1AoGBALc2ZLwahxGzUD8M5kkN\nxwqj1t+B8DqAyb6/Tw2Kmhflwb/M4eKxM84e8r01RrcdOq1jdXkcLyb29BsYTBFT\nYlbjN9cEbXJcmG3OHXJYy53n3ub/bneH9vzkoFjbKOMxlHj5AMsekwgXCUEXgos4\n6eVANKnoAcK2/oGcN0tRRzOA\n-----END PRIVATE KEY-----\n",
+  "client_email": "knotester-dev@knotester-dev.iam.gserviceaccount.com",
+  "client_id": "110818543805395873057",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/knotester-dev%40knotester-dev.iam.gserviceaccount.com"
+}

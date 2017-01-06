@@ -1,0 +1,87 @@
+<style>
+  .video-js {padding-top: 56.25%;}
+</style>
+<div id="notes-modal" class="notes-modal-class">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">{{vm.note.className}}</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <div class="container-fluid">
+            <div class="row">
+              <!-- Video -->
+              <div id="videodiv" class="col-lg-9 col-lg-push-3">
+                  <canvas id="annotation" style="z-index: 1; border: 0px solid #000000;"></canvas>
+                  <div class="embed-responsive embed-responsive-16by9">
+                    <video note elem="vm.elem" id="Video" class="video-js vjs-default-skin" height="auto" width="auto" controls autoplay>
+                    </video>
+
+                  </div>
+                <!-- Annotation controls -->
+                <h2>{{vm.note.description}}</h2>
+              </div>
+
+              <!-- bookmark toolbar -->
+              <div class="col-lg-3 col-lg-pull-9">
+                  <div class="row">
+                      <div class="dropdown">
+                          <button class="btn btn-success dropdown-toggle"
+                                  type="button" data-toggle="dropdown">New Bookmark
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li class="list-group-item list-group-item-success" ng-click="vm.SaveBookmark('test')">Test</li>
+                            <li class="list-group-item list-group-item-info"    ng-click="vm.SaveBookmark('review')">Review</li>
+                            <li class="list-group-item list-group-item-warning" ng-click="vm.SaveBookmark('question')">Question</li>
+                            <li class="list-group-item list-group-item-danger"  ng-click="vm.SaveBookmark('important')">Important</li>
+                            <li class="list-group-item list-group-item-success" ng-click="vm.SaveBookmark('audio')">Audio</li>
+                          </ul>
+                      </div>
+                  </div>
+                <div class="row">
+                    <ul class="list-group">
+                      <div ng-repeat="bookmark in vm.bookmarks">
+                        <li class="{{bookmark.htmlClass}}" ng-click="SetVideoTime(bookmark.position)">
+                          <img src="{{bookmark.icon}}" height="16" width="16">
+                          {{bookmark.type}}
+                          <span class="badge">Min: {{bookmark.min}}
+                                              Sec: {{bookmark.sec}}</span>
+                        </li>
+                      </div>
+                    </ul>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-primary" ng-click="EraseAnnotations()">Erase Annotations </button>
+                </div>
+                <div class="row">
+                    <div class="dropdown">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Annotation Thickness <span class="caret"></span></button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li ng-click="SetAnnotationThickness(1)"> 1</li>
+                        <li ng-click="SetAnnotationThickness(2)"> 2</li>
+                        <li ng-click="SetAnnotationThickness(3)"> 3</li>
+                        <li ng-click="SetAnnotationThickness(4)"> 4</li>
+                        <li ng-click="SetAnnotationThickness(8)"> 8</li>
+                        <li ng-click="SetAnnotationThickness(15)"> 15</li>
+                        <li ng-click="SetAnnotationThickness(30)"> 30</li>
+                      </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="dropdown">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Annotation Color <span class="caret"></span></button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li ng-click="SetAnnotationColor('Red')"> Red</li>
+                        <li ng-click="SetAnnotationColor('Cyan')"> Cyan</li>
+                        <li ng-click="SetAnnotationColor('Magenta')"> Magenta</li>
+                        <li ng-click="SetAnnotationColor('Green')"> Green</li>
+                        <li ng-click="SetAnnotationColor('Orange')"> Orange</li>
+                      </ul>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</div>

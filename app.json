@@ -1,0 +1,8 @@
+{
+  "name": "HoverCam Knotester",
+  "description": "HoverCam Knotester HTML5",
+  "repository": "https://github.com/",
+  "logo": "http://www.knotester.com/logo.png",
+  "keywords": ["node", "express", "static"],
+  "image": "heroku/nodejs"
+}

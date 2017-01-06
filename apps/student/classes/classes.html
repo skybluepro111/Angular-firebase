@@ -1,0 +1,50 @@
+<div class="row">
+    <div ng-hide="vm.welcome" class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading" ng-hide="vm.enteringCode">
+                <a class="btn btn-sm btn-success" style="float:left;margin-top: -6px;" ng-click='vm.enteringCode=true'><span class="glyphicon glyphicon-plus"></span> Join new class</a>
+                <div class="text-center" style="margin-left:45%;text-align:-webkit-auto;">
+                    <strong>Classes you are in</strong>
+                </div>
+            </div>
+            <div class="panel-heading" style="padding:5px 15px;" ng-show="vm.enteringCode">
+                <div class="input-group">
+                    <input type="text" ng-model="searchText" class="form-control" placeholder="Enter code here" ng-change="vm.findClassByCode(searchText)">
+                    <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click='vm.enteringCode=false'>Cancel</button>
+              </span>
+                </div>
+            </div>
+            <div class="panel-body">
+                <a ng-click="vm.classJoinHandle(vm.codedClass)" ng-show="vm.codedClass" class="btn btn-block btn-sm btn-success">
+                    <span style="font-weight:bold;">{{vm.codedClass.name}} (click to join)</span>
+                </a>
+                <a ng-repeat='cls in vm.classList' ng-click="vm.classClickHandle(cls)" class="btn btn-block btn-sm btn-default">
+                    <span style="font-weight:bold;">{{cls.name}}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="vm.welcome" class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="text-center">
+                    <strong>Welcome to Knotester</strong>
+                    <br>To start, please enter the code you got from your teacher
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="input-group" style="    margin-bottom: 10px;">
+                    <input type="text" ng-model="searchText" class="form-control" placeholder="Enter code here" ng-change="vm.findClassByCode(searchText)">
+                    <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click='vm.enteringCode=false'>Cancel</button>
+                </span>
+                </div>
+                <a ng-click="vm.classJoinHandle(vm.codedClass)" ng-show="vm.codedClass" class="btn btn-block btn-sm btn-success">
+                    <span style="font-weight:bold;">{{vm.codedClass.name}} (click to join)</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
